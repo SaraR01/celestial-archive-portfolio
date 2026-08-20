@@ -20,7 +20,9 @@ export default function App() {
   useEffect(() => {
     if (!rootRef.current) return;
     const timeline = introTimeline(rootRef.current);
-    return () => timeline?.kill();
+    return () => {
+    timeline?.kill();
+    };
   }, []);
 
   useEffect(() => {
@@ -29,7 +31,9 @@ export default function App() {
     if (!modal) return;
     const constellation = modal.querySelector('[data-modal-constellation]') as HTMLElement | null;
     const timeline = openBookTimeline(pendingBookElement.current, modal, constellation);
-    return () => timeline?.kill();
+    return () => {
+  timeline?.kill();
+  };
   }, [selectedBook]);
 
   function openBook(book: BookDefinition, element: HTMLButtonElement) {
