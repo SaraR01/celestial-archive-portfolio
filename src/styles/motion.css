@@ -19,3 +19,7 @@
     transition-duration: .01ms !important;
   }
 }
+
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .book-card:hover { transform: none; }
+}

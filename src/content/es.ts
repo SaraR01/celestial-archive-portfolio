@@ -1,5 +1,14 @@
 import type { BookDefinition, EducationItem, ExperienceItem, ProjectItem, SkillGroup } from '../types/content';
 
+export const homeEs = {
+  prologue: 'PRÓLOGO / 00',
+  title: 'El Archivo Celestial',
+  description:
+    'Tecnología, investigación y propósito. Una colección de capítulos construidos con curiosidad, disciplina y la decisión de ir siempre un poco más allá.',
+  cta: 'EXPLORAR EL ARCHIVO',
+  quote: '“Siempre hay algo nuevo que descubrir.”',
+} as const;
+
 export const booksEs: BookDefinition[] = [
   { id: 'about', number: '01', title: 'Sobre mí', subtitle: 'Historia y propósito', tone: 'cream' },
   { id: 'experience', number: '02', title: 'Experiencia', subtitle: 'Trayectoria profesional', tone: 'terracotta' },

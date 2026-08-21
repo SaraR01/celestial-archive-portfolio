@@ -1,5 +1,14 @@
 import type { BookDefinition, EducationItem, ExperienceItem, ProjectItem, SkillGroup } from '../types/content';
 
+export const homeEn = {
+  prologue: 'PROLOGUE / 00',
+  title: 'The Celestial Archive',
+  description:
+    'Technology, research and purpose. A collection of chapters built with curiosity, discipline and the decision to always go a little further.',
+  cta: 'EXPLORE THE ARCHIVE',
+  quote: '“There is always something new to discover.”',
+} as const;
+
 export const booksEn: BookDefinition[] = [
   { id: 'about', number: '01', title: 'About', subtitle: 'Story and purpose', tone: 'cream' },
   { id: 'experience', number: '02', title: 'Experience', subtitle: 'Professional journey', tone: 'terracotta' },

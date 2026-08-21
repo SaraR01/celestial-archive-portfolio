@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { BookDefinition, Language } from './types/content';
-import { booksEs } from './content/es';
-import { booksEn } from './content/en';
+import { booksEs, homeEs } from './content/es';
+import { booksEn, homeEn } from './content/en';
 import { profile } from './content/profile';
 import { Header } from './components/Header';
 import { CelestialBackground } from './components/CelestialBackground';
@@ -16,12 +16,13 @@ export default function App() {
   const pendingBookElement = useRef<HTMLButtonElement | null>(null);
 
   const books = useMemo(() => (language === 'es' ? booksEs : booksEn), [language]);
+  const home = language === 'es' ? homeEs : homeEn;
 
   useEffect(() => {
     if (!rootRef.current) return;
     const timeline = introTimeline(rootRef.current);
     return () => {
-    timeline?.kill();
+      timeline?.revert();
     };
   }, []);
 
@@ -51,34 +52,24 @@ export default function App() {
           <section className="hero">
             <div className="hero-copy">
               <p data-hero-kicker className="eyebrow">
-                {language === 'es' ? 'PRÓLOGO / 00' : 'PROLOGUE / 00'}
+                {home.prologue}
               </p>
-              <h1 data-hero-title>
-                {language === 'es' ? 'El Archivo Celestial' : 'The Celestial Archive'}
-              </h1>
-              <p data-hero-copy>
-                {language === 'es'
-                  ? 'Tecnología, investigación y propósito. Una colección de capítulos construidos con curiosidad, disciplina y la decisión de ir siempre un poco más allá.'
-                  : 'Technology, research and purpose. A collection of chapters built with curiosity, discipline and the decision to always go a little further.'}
-              </p>
+              <h1 data-hero-title>{home.title}</h1>
+              <p data-hero-copy>{home.description}</p>
               <a data-hero-cta href="#library" className="primary-cta">
-                {language === 'es' ? 'EXPLORAR EL ARCHIVO' : 'EXPLORE THE ARCHIVE'} →
+                {home.cta} →
               </a>
-              <p className="hero-quote">
-                {language === 'es'
-                  ? '“Siempre hay algo nuevo que descubrir.”'
-                  : '“There is always something new to discover.”'}
-              </p>
+              <p className="hero-quote">{home.quote}</p>
             </div>
 
             <div className="hero-meta">
-              <span>{profile.roleEs}</span>
-              <span>{profile.recognitionEs}</span>
+              <span>{language === 'es' ? profile.roleEs : profile.roleEn}</span>
+              <span>{language === 'es' ? profile.recognitionEs : profile.recognitionEn}</span>
               <span>{profile.location}</span>
             </div>
           </section>
 
-          <Library books={books} onOpen={openBook} />
+          <Library books={books} language={language} onOpen={openBook} />
         </main>
       </div>
 
