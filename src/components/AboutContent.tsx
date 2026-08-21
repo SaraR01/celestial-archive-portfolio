@@ -7,6 +7,7 @@ interface Props {
     intro: string;
     second: string;
     traits: string;
+    traitsBody: string;
     quote: string;
     quoteBody: string;
     methodTitle: string;
@@ -32,6 +33,7 @@ export function AboutContent({ content, language }: Props) {
           </div>
         </div>
         <p className="traits">{content.traits}</p>
+        <p className="traits-detail">{content.traitsBody}</p>
         <blockquote>{content.quote}</blockquote>
         <p>{content.quoteBody}</p>
       </article>

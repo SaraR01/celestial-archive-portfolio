@@ -25,10 +25,11 @@ export const aboutEn = {
     'Systems Engineer with a structured, curious and imaginative way of thinking. Technology motivates me because there is always something new to learn, research or solve.',
   second:
     'I prefer to understand a problem deeply, explore alternatives and then build a solution with intention.',
-  traits: 'INTENSE · RESILIENT · DREAMER · QUIET · LITERAL',
-  quote: '“I am proud of myself.”',
+  traits: 'BETWEEN LOGIC AND CONSTELLATIONS',
+  traitsBody: 'I observe. I research. I connect ideas. I build.',
+  quote: '“I do not follow a map. I learn to read the stars.”',
   quoteBody:
-    'Not as a finished destination, but as the sum of every challenge, every lesson and every time I decided to go a little further.',
+    'Technology is constantly changing. My way forward is to understand, research and build my own path.',
   methodTitle: 'Understand before building',
   method: [
     ['01', 'UNDERSTAND', 'Understand the problem and its context before deciding.'],

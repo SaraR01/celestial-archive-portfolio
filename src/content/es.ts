@@ -25,10 +25,11 @@ export const aboutEs = {
     'Ingeniera en Sistemas con una forma de pensar estructurada, curiosa e imaginativa. Me motiva la tecnología porque siempre hay algo nuevo que aprender, investigar o resolver.',
   second:
     'Prefiero entender un problema a fondo, explorar alternativas y después construir una solución con intención.',
-  traits: 'INTENSA · LUCHADORA · SOÑADORA · CALLADA · LITERAL',
-  quote: '“Estoy orgullosa de mí.”',
+  traits: 'ENTRE LÓGICA Y CONSTELACIONES',
+  traitsBody: 'Observo. Investigo. Conecto ideas. Construyo.',
+  quote: '“No sigo un mapa. Aprendo a leer las estrellas.”',
   quoteBody:
-    'No como una meta terminada, sino como la suma de cada reto, cada aprendizaje y cada vez que decidí hacer un poco más.',
+    'La tecnología cambia constantemente. Mi forma de avanzar es entender, investigar y construir mi propio camino.',
   methodTitle: 'Entender antes de construir',
   method: [
     ['01', 'ENTENDER', 'Comprender el problema y el contexto antes de decidir.'],
