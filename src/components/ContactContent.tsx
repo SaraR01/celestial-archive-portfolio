@@ -5,6 +5,8 @@ interface Props {
 }
 
 export function ContactContent({ language }: Props) {
+  const cvAvailable = false;
+
   return (
     <>
       <article className="book-page book-page--left letter-page">
@@ -26,9 +28,16 @@ export function ContactContent({ language }: Props) {
           <a href={`mailto:${profile.email}`}>EMAIL <span>↗</span></a>
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LINKEDIN <span>↗</span></a>
           <a href={profile.github} target="_blank" rel="noreferrer">GITHUB <span>↗</span></a>
-          <a href={profile.cv} download>
-            {language === 'es' ? 'DESCARGAR CV' : 'DOWNLOAD CV'} <span>↓</span>
-          </a>
+          {cvAvailable ? (
+            <a href={profile.cv} download>
+              {language === 'es' ? 'DESCARGAR CV' : 'DOWNLOAD CV'} <span>↓</span>
+            </a>
+          ) : (
+            <span className="contact-link contact-link--disabled" aria-disabled="true">
+              {language === 'es' ? 'CV · EN PREPARACIÓN' : 'CV · IN PREPARATION'}
+              <span aria-hidden="true">⌛</span>
+            </span>
+          )}
         </div>
         <div className="contact-note">
           <small>{language === 'es' ? 'SIN FORMULARIOS · SIN BACKEND' : 'NO FORMS · NO BACKEND'}</small>

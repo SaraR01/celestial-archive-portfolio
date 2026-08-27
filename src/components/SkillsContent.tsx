@@ -45,15 +45,25 @@ export function SkillsContent({ items, language }: Props) {
         <h3>{language === 'es' ? 'Constelaciones técnicas' : 'Technical constellations'}</h3>
         <div className="skill-constellation-map">
           {items.slice(4).map((group, index) => (
-            <div
+            <section
               className={`skill-constellation skill-constellation--${index + 1}`}
               key={group.title}
             >
-              <span className="constellation-node" />
-              <strong>{group.title}</strong>
-              <small>{levelLabels[language][group.level]}</small>
-              <p>{group.items.slice(0, 6).join(' · ')}</p>
-            </div>
+              <div className="constellation-graphic" aria-hidden="true">
+                <span className="constellation-node" />
+                <span className="constellation-node-secondary constellation-node-secondary--1" />
+                <span className="constellation-node-secondary constellation-node-secondary--2" />
+                <span className="constellation-node-secondary constellation-node-secondary--3" />
+                <i className="constellation-line constellation-line--1" />
+                <i className="constellation-line constellation-line--2" />
+                <i className="constellation-line constellation-line--3" />
+              </div>
+              <div className="constellation-copy">
+                <strong>{group.title}</strong>
+                <small>{levelLabels[language][group.level]}</small>
+                <p>{group.items.join(' · ')}</p>
+              </div>
+            </section>
           ))}
         </div>
         <div className="skill-legend">

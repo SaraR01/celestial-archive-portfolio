@@ -47,6 +47,11 @@ export function openBookTimeline(
 
   document.body.appendChild(clone);
 
+  gsap.set(clone, {
+    transformPerspective: 900,
+    transformOrigin: '50% 50%',
+  });
+
   const isMobile = window.matchMedia('(max-width: 900px)').matches;
   const openBook = modal.querySelector('.open-book') as HTMLElement | null;
   const tl = gsap.timeline({
@@ -80,9 +85,10 @@ export function openBookTimeline(
   if (openBook) {
     gsap.set(openBook, {
       opacity: 0,
-      scale: 0.96,
-      rotateX: 2,
+      scale: 0.82,
+      rotateX: 3,
       transformPerspective: 1200,
+      transformOrigin: '50% 50%',
       '--book-highlight': 0,
     });
   }
@@ -93,30 +99,76 @@ export function openBookTimeline(
       boxShadow: '0 0 30px rgba(214, 132, 73, .3)',
       duration: 0.16,
     }, 0)
+    // 1. Sale de la estantería y crece
     .to(clone, {
       left: '50%',
       top: '50%',
       xPercent: -50,
       yPercent: -50,
-      scale: 1.7,
-      rotateY: 11,
-      rotateX: -2,
-      transformPerspective: 950,
-      duration: 0.62,
+      scale: 1.85,
+      rotateY: -4,
+      rotateZ: 0,
+      duration: 0.48,
       ease: 'power3.inOut',
-    }, 0.08)
-    .to(constellation || {}, { opacity: 0.8, duration: 0.28 }, 0.48)
-    .to(modal, { opacity: 1, duration: 0.36, ease: 'power2.out' }, 0.62)
-    .to(openBook || {}, {
-      opacity: 1,
-      scale: 1,
-      rotateX: 0,
-      duration: 0.38,
+    })
+
+    // 2. Continúa creciendo mientras se prepara para abrir
+    .to(clone, {
+      scale: 2.15,
+      rotateY: 0,
+      duration: 0.22,
       ease: 'power2.out',
-    }, 0.68)
-    .to(clone, { opacity: 0, rotateY: -7, duration: 0.2 }, 0.72)
-    .to(openBook || {}, { '--book-highlight': 0.65, duration: 0.12 }, 0.98)
-    .to(openBook || {}, { '--book-highlight': 0.2, duration: 0.16 }, 1.1);
+    })
+
+    // 3. Simula el comienzo de la apertura
+    .to(clone, {
+      scaleX: 2.65,
+      scaleY: 2.15,
+      opacity: 0,
+      duration: 0.28,
+      ease: 'power2.inOut',
+    })
+    .to(
+      modal,
+      {
+        opacity: 1,
+        duration: 0.28,
+        ease: 'power2.out',
+      },
+      '-=0.12',
+    )
+
+    .to(
+      constellation || {},
+      {
+        opacity: 0.8,
+        duration: 0.28,
+      },
+      '-=0.32',
+    )
+    .to(
+      openBook || {},
+      {
+        opacity: 1,
+        scale: 1,
+        rotateX: 0,
+        duration: 0.38,
+        ease: 'power3.out',
+      },
+      '-=0.18',
+    )
+    .to(
+      openBook || {},
+      {
+        '--book-highlight': 0.65,
+        duration: 0.12,
+      },
+      '-=0.10',
+    )
+    .to(openBook || {}, {
+      '--book-highlight': 0.2,
+      duration: 0.16,
+    });
 
   return tl;
 }

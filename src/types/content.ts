@@ -39,11 +39,32 @@ export interface EducationItem {
   note?: string;
 }
 
-export interface ProjectItem {
+export interface PlannedProject {
   number: string;
   title: string;
-  status: 'real' | 'planned';
+  status: 'planned';
   stack: string[];
   description: string;
-  points?: string[];
 }
+
+export interface ProfessionalCase {
+  number: string;
+  title: string;
+  status: 'case';
+  group: string;
+  category: string;
+  summary: string;
+  context: string;
+  challengeLabel: string;
+  challenges: string[];
+  participation: string[];
+  result: string;
+  tools: string[];
+  subtitle?: string;
+  process?: string[];
+  flow?: string[];
+  metaLabel?: string;
+  meta?: string;
+}
+
+export type ProjectItem = PlannedProject | ProfessionalCase;

@@ -1,25 +1,226 @@
 @media (prefers-reduced-motion: no-preference) {
-  .star { animation: twinkle 4.5s ease-in-out infinite alternate; }
-  .star:nth-child(3n) { animation-delay: -1.4s; }
-  .monogram { animation: monogramGlow 6s ease-in-out infinite; }
-}
-@keyframes twinkle {
-  from { opacity: .28; transform: scale(.85); }
-  to { opacity: .9; transform: scale(1.2); }
-}
-@keyframes monogramGlow {
-  0%,100% { box-shadow: 0 0 0 rgba(200,123,70,0); }
-  50% { box-shadow: 0 0 26px rgba(200,123,70,.18); }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+  .star {
+    animation: celestialTwinkle 3.8s ease-in-out infinite;
+  }
+
+  .star:nth-child(2n) {
+    animation-delay: -1.2s;
+  }
+
+  .star:nth-child(3n) {
+    animation-delay: -2.3s;
+  }
+
+  .star:nth-child(5n) {
+    animation-duration: 5.2s;
+  }
+
+  .star--accent {
+    animation: celestialPulse 4.6s ease-in-out infinite;
   }
 }
 
-@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
-  .book-card:hover { transform: none; }
+@keyframes celestialTwinkle {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: scale(0.75);
+    box-shadow: 0 0 3px rgba(225, 163, 101, 0.05);
+  }
+
+  45% {
+    opacity: 0.65;
+    transform: scale(1);
+    box-shadow: 0 0 7px rgba(225, 163, 101, 0.25);
+  }
+
+  55% {
+    opacity: 1;
+    transform: scale(1.45);
+    box-shadow:
+      0 0 6px rgba(246, 235, 221, 0.85),
+      0 0 14px rgba(225, 163, 101, 0.55);
+  }
+}
+
+@keyframes celestialPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+    box-shadow: 0 0 7px rgba(225, 163, 101, 0.28);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.7);
+    box-shadow:
+      0 0 8px rgba(255, 238, 213, 0.95),
+      0 0 20px rgba(225, 163, 101, 0.7),
+      0 0 34px rgba(200, 123, 70, 0.25);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .celestial-constellation {
+    animation: constellationReveal 9s ease-in-out infinite;
+  }
+
+  .celestial-constellation path {
+    animation: constellationFlow 12s linear infinite;
+  }
+
+  .celestial-constellation circle {
+    animation: constellationStar 4s ease-in-out infinite;
+  }
+
+  .celestial-constellation circle:nth-of-type(2n) {
+    animation-delay: -1.7s;
+  }
+
+  .celestial-constellation circle:nth-of-type(3n) {
+    animation-delay: -2.8s;
+  }
+}
+
+@keyframes constellationReveal {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+
+  40%,
+  65% {
+    opacity: 0.42;
+  }
+}
+
+@keyframes constellationFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes constellationStar {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+    transform-origin: center;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .book-card {
+    overflow: visible;
+  }
+
+  .book-card::before,
+  .book-card::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 4;
+  }
+
+  /* Destello principal */
+  .book-card::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    top: 18%;
+    right: 14%;
+    background: #f6ebdd;
+
+    box-shadow:
+      0 0 5px rgba(246, 235, 221, 0.95),
+      0 0 12px rgba(225, 163, 101, 0.8),
+      0 0 22px rgba(200, 123, 70, 0.45);
+  }
+
+  /* Destello secundario */
+  .book-card::after {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    left: 17%;
+    bottom: 22%;
+    background: #e1a365;
+
+    box-shadow:
+      0 0 5px rgba(225, 163, 101, 0.9),
+      0 0 15px rgba(225, 163, 101, 0.55);
+  }
+
+  .book-card:hover::before {
+    animation: bookSparkPrimary 1.15s ease-out infinite;
+  }
+
+  .book-card:hover::after {
+    animation: bookSparkSecondary 1.45s ease-out infinite;
+    animation-delay: 0.18s;
+  }
+}
+
+@keyframes bookSparkPrimary {
+  0% {
+    opacity: 0;
+    transform: translate(0, 8px) scale(0.3);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translate(4px, 0) scale(1.45);
+  }
+
+  55% {
+    opacity: 0.75;
+    transform: translate(-5px, -10px) scale(0.8);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(8px, -22px) scale(0.2);
+  }
+}
+
+@keyframes bookSparkSecondary {
+  0% {
+    opacity: 0;
+    transform: translate(0, 5px) scale(0.2);
+  }
+
+  25% {
+    opacity: 0.9;
+    transform: translate(-4px, -2px) scale(1.2);
+  }
+
+  65% {
+    opacity: 0.55;
+    transform: translate(6px, -12px) scale(0.7);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-6px, -19px) scale(0.1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .projects-view { animation: projectsViewIn .24s ease-out both; }
+}
+
+@keyframes projectsViewIn {
+  from { opacity: .7; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
