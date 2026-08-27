@@ -220,6 +220,14 @@
   .projects-view { animation: projectsViewIn .24s ease-out both; }
 }
 
+.book-is-open .celestial-layer .star,
+.book-is-open .celestial-layer .celestial-constellation,
+.book-is-open .celestial-layer .celestial-constellation path,
+.book-is-open .celestial-layer .celestial-constellation circle,
+.book-is-open .celestial-layer .secret-pyramid span {
+  animation-play-state: paused;
+}
+
 @keyframes projectsViewIn {
   from { opacity: .7; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }

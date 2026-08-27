@@ -2,7 +2,7 @@ import type { BookDefinition, EducationItem, ExperienceItem, ProjectItem, SkillG
 
 export const homeEs = {
   prologue: 'PRÓLOGO / 00',
-  title: 'El Archivo Celestial',
+  title: 'Digital Archive · Sara Retana',
   description:
     'Tecnología, investigación y propósito. Una colección de capítulos construidos con curiosidad, disciplina y la decisión de ir siempre un poco más allá.',
   cta: 'EXPLORAR EL ARCHIVO',
@@ -42,7 +42,7 @@ export const aboutEs = {
 export const experienceEs: ExperienceItem[] = [
   {
     period: 'Oct 2025 — Jun 2026',
-    role: 'Técnico',
+    role: 'Consultora E-Commerce',
     company: 'Componentes El Orbe',
     focus: 'Coordinación técnica, operaciones TI, ciberseguridad, AWS, incident management y mejora de procesos.',
     points: [

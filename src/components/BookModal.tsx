@@ -30,6 +30,12 @@ export function BookModal({ book, language, onClose }: Props) {
 
   useEffect(() => {
     if (!book) return;
+    document.body.classList.add('book-is-open');
+    return () => document.body.classList.remove('book-is-open');
+  }, [book]);
+
+  useEffect(() => {
+    if (!book) return;
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') handleClose();
     };

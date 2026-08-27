@@ -2,7 +2,7 @@ import type { BookDefinition, EducationItem, ExperienceItem, ProjectItem, SkillG
 
 export const homeEn = {
   prologue: 'PROLOGUE / 00',
-  title: 'The Celestial Archive',
+  title: 'Digital Archive · Sara Retana',
   description:
     'Technology, research and purpose. A collection of chapters built with curiosity, discipline and the decision to always go a little further.',
   cta: 'EXPLORE THE ARCHIVE',

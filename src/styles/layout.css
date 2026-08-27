@@ -151,17 +151,16 @@
     height: min(520px, 58vh);
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(185,106,60,.15), transparent 68%);
-    filter: blur(22px);
+    background: radial-gradient(ellipse, rgba(185,106,60,.13), transparent 68%);
     pointer-events: none;
   }
   .open-book {
     --book-highlight: 0;
-    perspective: 1400px;
-    transform-style: preserve-3d;
-    filter:
-      drop-shadow(0 34px 34px rgba(0,0,0,.62))
-      drop-shadow(0 12px 12px rgba(0,0,0,.34));
+    border-radius: 18px;
+    filter: none;
+    box-shadow:
+      0 34px 42px rgba(0,0,0,.54),
+      0 12px 18px rgba(0,0,0,.28);
   }
   .open-book::before {
     content: "";
@@ -191,16 +190,12 @@
     border-radius: 999px;
   }
   .book-page--left {
-    transform: rotateY(1.1deg);
-    transform-origin: right center;
     background:
       linear-gradient(to left, rgba(83,49,31,.18), transparent 13%),
       linear-gradient(90deg, #e8d7bc, #f7eddb);
     box-shadow: inset 9px 0 15px rgba(255,239,213,.18), inset -8px 0 15px rgba(76,43,27,.12);
   }
   .book-page--right {
-    transform: rotateY(-1.1deg);
-    transform-origin: left center;
     background:
       linear-gradient(to right, rgba(83,49,31,.18), transparent 13%),
       linear-gradient(90deg, #f8efdf, #e6d1b2);

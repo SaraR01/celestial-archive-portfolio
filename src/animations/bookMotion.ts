@@ -54,9 +54,17 @@ export function openBookTimeline(
 
   const isMobile = window.matchMedia('(max-width: 900px)').matches;
   const openBook = modal.querySelector('.open-book') as HTMLElement | null;
+  const clearTemporaryTransforms = () => {
+    clone.remove();
+    if (!isMobile && openBook) {
+      gsap.set(openBook, {
+        clearProps: 'transform,transformOrigin,transformStyle,perspective',
+      });
+    }
+  };
   const tl = gsap.timeline({
-    onComplete: () => clone.remove(),
-    onInterrupt: () => clone.remove(),
+    onComplete: clearTemporaryTransforms,
+    onInterrupt: clearTemporaryTransforms,
   });
 
   gsap.set(modal, { display: 'grid', opacity: 0 });
