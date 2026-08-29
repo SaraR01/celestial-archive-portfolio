@@ -1,3 +1,5 @@
+const baseUrl = (import.meta as ImportMeta & { env: { BASE_URL: string } }).env.BASE_URL;
+
 export const profile = {
   name: 'Sara Retana Pérez',
   roleEs: 'Ingeniera en Sistemas',
@@ -9,6 +11,6 @@ export const profile = {
   email: 'retanasara003@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sara-r-494809232',
   github: 'https://github.com/SaraR01',
-  photo: 'public/assets/sara-retana.jpg',
-  cv: '/cv/Sara_Retana_Perez_CV_General.pdf',
+  photo: `${baseUrl}assets/sara-retana.jpg`,
+  cv: `${baseUrl}cv/Sara_Retana_Perez_CV_General.pdf`,
 } as const;
