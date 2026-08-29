@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import type { ProfessionalCase, ProjectItem } from '../types/content';
+import type { PlannedProject, ProjectItem, PublicProject } from '../types/content';
 import { projectsIntroEn } from '../content/en';
 import { projectsIntroEs } from '../content/es';
 import { ComingSoonVolume } from './ComingSoonVolume';
@@ -10,109 +9,20 @@ interface Props {
 }
 
 export function ProjectsContent({ items, language }: Props) {
-  const [selectedCaseNumber, setSelectedCaseNumber] = useState<string | null>(null);
-  const cases = items.filter((item): item is ProfessionalCase => item.status === 'case');
-  const planned = items.filter((item) => item.status === 'planned');
-  const selectedCase = cases.find((item) => item.number === selectedCaseNumber) ?? null;
+  const planned = items.filter((item): item is PlannedProject => item.status === 'planned');
+  const completed = items.filter((item): item is PublicProject => item.status === 'completed');
   const intro = language === 'es' ? projectsIntroEs : projectsIntroEn;
   const labels = language === 'es'
     ? {
-        cases: 'CASOS PROFESIONALES',
-        open: 'Abrir expediente →',
-        archive: 'ARCHIVO',
-        context: 'Contexto',
-        participation: 'Mi participación',
-        process: 'Proceso',
-        result: 'Resultado',
-        tools: 'Tecnologías / Herramientas',
-        back: '← Volver a proyectos',
-        next: 'PRÓXIMOS VOLÚMENES',
+        publicProjects: 'PROYECTOS PERSONALES Y PÚBLICOS', problem: 'Problema', solution: 'Solución',
+        architecture: 'Arquitectura', stack: 'Stack', demo: 'VER DEMO', github: 'GITHUB',
+        next: 'PRÓXIMOS VOLÚMENES', empty: 'Los proyectos públicos terminados aparecerán en este archivo.',
       }
     : {
-        cases: 'PROFESSIONAL CASES',
-        open: 'Open case file →',
-        archive: 'FILE',
-        context: 'Context',
-        participation: 'My contribution',
-        process: 'Process',
-        result: 'Outcome',
-        tools: 'Technologies / Tools',
-        back: '← Back to projects',
-        next: 'NEXT VOLUMES',
+        publicProjects: 'PERSONAL AND PUBLIC PROJECTS', problem: 'Problem', solution: 'Solution',
+        architecture: 'Architecture', stack: 'Stack', demo: 'VIEW DEMO', github: 'GITHUB',
+        next: 'NEXT VOLUMES', empty: 'Completed public projects will appear in this archive.',
       };
-
-  if (selectedCase) {
-    return (
-      <>
-        <article className="book-page book-page--left project-detail-page projects-view">
-          <p className="eyebrow">{labels.archive} / {selectedCase.number}</p>
-          <p className="project-case-category">{selectedCase.category}</p>
-          <h2>{selectedCase.title}</h2>
-          {selectedCase.subtitle && <p className="project-case-subtitle">{selectedCase.subtitle}</p>}
-          {selectedCase.meta && (
-            <p className="project-case-meta">
-              <strong>{selectedCase.metaLabel}</strong> · {selectedCase.meta}
-            </p>
-          )}
-          <section className="project-case-section">
-            <h3>{labels.context}</h3>
-            <p>{selectedCase.context}</p>
-          </section>
-          {selectedCase.challenges.length > 0 && (
-            <section className="project-case-section">
-              <h3>{selectedCase.challengeLabel}</h3>
-              <ul>
-                {selectedCase.challenges.map((challenge) => <li key={challenge}>{challenge}</li>)}
-              </ul>
-            </section>
-          )}
-          {selectedCase.flow && (
-            <div className="project-flow" aria-label={selectedCase.flow.join(' → ')}>
-              {selectedCase.flow.map((step, index) => (
-                <span key={step}>
-                  {step}{index < selectedCase.flow!.length - 1 && <i aria-hidden="true">→</i>}
-                </span>
-              ))}
-            </div>
-          )}
-        </article>
-
-        <article className="book-page book-page--right project-detail-page projects-view">
-          <p className="eyebrow">✦ {labels.archive} {selectedCase.number}</p>
-          <section className="project-case-section">
-            <h3>{labels.participation}</h3>
-            <ul>
-              {selectedCase.participation.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-          </section>
-          {selectedCase.process && (
-            <section className="project-case-section">
-              <h3>{labels.process}</h3>
-              <div className="project-process">
-                {selectedCase.process.map((step) => <span key={step}>{step}</span>)}
-              </div>
-            </section>
-          )}
-          <section className="project-case-section project-case-result">
-            <h3>{labels.result}</h3>
-            <p>{selectedCase.result}</p>
-          </section>
-          <section className="project-case-tools">
-            <h3>{labels.tools}</h3>
-            <p>{selectedCase.tools.join(' · ')}</p>
-          </section>
-          <button className="project-back" type="button" onClick={() => setSelectedCaseNumber(null)}>
-            {labels.back}
-          </button>
-        </article>
-      </>
-    );
-  }
-
-  const groupedCases = cases.reduce<Record<string, ProfessionalCase[]>>((groups, item) => {
-    (groups[item.group] ??= []).push(item);
-    return groups;
-  }, {});
 
   return (
     <>
@@ -121,32 +31,29 @@ export function ProjectsContent({ items, language }: Props) {
         <h2>{intro.title}</h2>
         <blockquote className="projects-lead">{intro.lead}</blockquote>
         <p>{intro.description}</p>
-        <p className="project-index-label">{labels.cases}</p>
-
-        <div className="project-case-index">
-          {Object.entries(groupedCases).map(([group, groupCases]) => (
-            <section className="project-case-group" key={group}>
-              <h3>{group}</h3>
-              {groupCases.map((item) => (
-                <button
-                  className="project-case-entry"
-                  type="button"
-                  key={item.number}
-                  onClick={() => setSelectedCaseNumber(item.number)}
-                >
-                  <span className="project-case-number">{item.number}</span>
-                  <span className="project-case-summary">
-                    <small>{item.category}</small>
-                    <strong>{item.title}</strong>
-                    <span>{item.summary}</span>
-                    <em>{item.tools.join(' · ')}</em>
-                  </span>
-                  <span className="project-case-action">{labels.open}</span>
-                </button>
-              ))}
-            </section>
-          ))}
-        </div>
+        <p className="project-index-label">{labels.publicProjects}</p>
+        {completed.length === 0 ? (
+          <p className="projects-empty-note">{labels.empty}</p>
+        ) : (
+          <div className="public-project-list">
+            {completed.map((project) => (
+              <section className="public-project" key={project.number}>
+                <small>{language === 'es' ? 'PROYECTO' : 'PROJECT'} {project.number}</small>
+                <h3>{project.title}</h3>
+                <dl>
+                  <div><dt>{labels.problem}</dt><dd>{project.problem}</dd></div>
+                  <div><dt>{labels.solution}</dt><dd>{project.solution}</dd></div>
+                  <div><dt>{labels.architecture}</dt><dd>{project.architecture}</dd></div>
+                  <div><dt>{labels.stack}</dt><dd>{project.stack.join(' · ')}</dd></div>
+                </dl>
+                <div className="public-project-actions">
+                  {project.demoUrl && <a href={project.demoUrl} target="_blank" rel="noreferrer">{labels.demo}</a>}
+                  {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">{labels.github}</a>}
+                </div>
+              </section>
+            ))}
+          </div>
+        )}
       </article>
 
       <article className="book-page book-page--right projects-next-page projects-view">
@@ -154,24 +61,12 @@ export function ProjectsContent({ items, language }: Props) {
         <h3>{language === 'es' ? 'Próximos volúmenes' : 'Next volumes'}</h3>
         <div className="project-stack">
           {planned.map((item) => (
-            <ComingSoonVolume
-              key={item.number}
-              number={item.number}
-              title={item.title}
-              stack={item.stack}
-              description={item.description}
-              language={language}
-            />
+            <ComingSoonVolume key={item.number} number={item.number} title={item.title} stack={item.stack} description={item.description} language={language} />
           ))}
         </div>
-
         <div className="dark-principle">
           <small>{language === 'es' ? 'PRINCIPIO' : 'PRINCIPLE'}</small>
-          <p>
-            {language === 'es'
-              ? 'Problema → Investigación → Solución → Resultado'
-              : 'Problem → Research → Solution → Result'}
-          </p>
+          <p>{language === 'es' ? 'Problema → Investigación → Solución → Resultado' : 'Problem → Research → Solution → Result'}</p>
         </div>
       </article>
     </>

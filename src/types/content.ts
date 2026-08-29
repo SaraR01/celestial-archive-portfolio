@@ -21,8 +21,13 @@ export interface ExperienceItem {
   period: string;
   role: string;
   company: string;
+  client?: string;
   focus: string;
+  indicators?: Array<{ value: string; label: string }>;
   points: string[];
+  results: string[];
+  caseNumbers?: string[];
+  kind: 'primary' | 'internship';
   tools: string[];
 }
 
@@ -47,6 +52,18 @@ export interface PlannedProject {
   description: string;
 }
 
+export interface PublicProject {
+  number: string;
+  title: string;
+  status: 'completed';
+  problem: string;
+  solution: string;
+  architecture: string;
+  stack: string[];
+  demoUrl?: string;
+  githubUrl?: string;
+}
+
 export interface ProfessionalCase {
   number: string;
   title: string;
@@ -55,6 +72,10 @@ export interface ProfessionalCase {
   category: string;
   summary: string;
   context: string;
+  objective?: string;
+  scope?: string[];
+  strategy?: string[];
+  coordination?: string[];
   challengeLabel: string;
   challenges: string[];
   participation: string[];
@@ -67,4 +88,4 @@ export interface ProfessionalCase {
   meta?: string;
 }
 
-export type ProjectItem = PlannedProject | ProfessionalCase;
+export type ProjectItem = PlannedProject | ProfessionalCase | PublicProject;

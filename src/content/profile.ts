@@ -9,6 +9,6 @@ export const profile = {
   email: 'retanasara003@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sara-r-494809232',
   github: 'https://github.com/SaraR01',
-  photo: '/assets/sara-retana.jpg',
+  photo: 'public/assets/sara-retana.jpg',
   cv: '/cv/Sara_Retana_Perez_CV_General.pdf',
 } as const;
