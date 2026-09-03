@@ -367,18 +367,25 @@ blockquote { margin: 28px 0 5px; color: #6a4330; font-size: 1.55rem; }
 .skill-block { padding: 14px 18px; border-left: 2px solid var(--copper); background: rgba(255,255,255,.18); }
 .skill-block small { color: #a65f34; font-size: .58rem; letter-spacing: .08em; }
 .skill-block h3 { margin: 5px 0; font-size: 1.05rem; }
-.skill-constellation-map { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.skill-map-page { min-width: 0; container: skills-page / inline-size; }
+.skill-constellation-map { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: calc(100% - 24px); max-width: 440px; gap: 14px; margin: 20px auto 0; }
 .skill-constellation {
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 8px;
   align-items: start;
-  min-height: 158px;
-  padding: 16px;
+  min-width: 0;
+  width: 100%;
+  max-width: 430px;
+  margin-inline: auto;
+  min-height: 138px;
+  padding: 14px;
+  box-sizing: border-box;
   border: 1px solid rgba(181,140,101,.32);
   border-radius: 10px;
   background: rgba(255,255,255,.12);
 }
+.skill-constellation .constellation-graphic { transform: scale(.88); transform-origin: top left; }
 .constellation-graphic { position: relative; width: 58px; height: 66px; }
 .constellation-node { position: absolute; left: 23px; top: 25px; width: 11px; height: 11px; border-radius: 50%; background: #d98a4c; box-shadow: 0 0 16px rgba(217,138,76,.35); }
 .constellation-node-secondary { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #b96b3e; }
@@ -389,11 +396,16 @@ blockquote { margin: 28px 0 5px; color: #6a4330; font-size: 1.55rem; }
 .constellation-line--1 { width: 27px; transform: rotate(-139deg); }
 .constellation-line--2 { width: 29px; transform: rotate(-34deg); }
 .constellation-line--3 { width: 30px; transform: rotate(126deg); }
-.constellation-copy { min-width: 0; }
+.constellation-copy { min-width: 0; overflow-wrap: normal; word-break: normal; }
 .constellation-copy strong { display: block; color: #593828; font-family: var(--font-serif); font-size: .98rem; }
-.constellation-copy small { display: block; margin-top: 5px; color: #a65f34; font-size: .52rem; letter-spacing: .07em; }
-.constellation-copy p { margin: 10px 0 0; font-size: .67rem; line-height: 1.5; overflow-wrap: anywhere; }
-.skill-legend { display: grid; gap: 7px; font-size: .6rem; color: var(--muted-ink); }
+.constellation-copy small { display: block; margin-top: 4px; color: #a65f34; font-size: .5rem; letter-spacing: .07em; line-height: 1.35; }
+.constellation-copy p { margin: 8px 0 0; font-size: .65rem; line-height: 1.4; overflow-wrap: normal; word-break: normal; }
+.skill-legend { display: grid; width: calc(100% - 24px); max-width: 440px; margin: 24px auto 0; gap: 7px; font-size: .6rem; color: var(--muted-ink); overflow-wrap: normal; word-break: normal; }
+
+@container skills-page (max-width: 440px) {
+  .skill-constellation-map { grid-template-columns: minmax(0, 1fr); max-width: 430px; }
+  .skill-constellation { min-height: 0; }
+}
 
 .education-list { display: grid; gap: 15px; margin-top: 25px; }
 .education-list section { padding-left: 16px; border-left: 2px solid rgba(185,106,60,.55); }
@@ -514,7 +526,7 @@ blockquote { margin: 28px 0 5px; color: #6a4330; font-size: 1.55rem; }
   .modal-back { display: none; }
   .about-grid { grid-template-columns: 1fr; }
   .portrait-shell { margin: 0 auto; }
-  .skill-constellation-map { grid-template-columns: 1fr; gap: 12px; }
+  .skill-constellation-map { grid-template-columns: minmax(0, 1fr); max-width: 430px; gap: 12px; }
   .skill-constellation { min-height: 0; grid-template-columns: 54px minmax(0, 1fr); padding: 14px; }
   .constellation-graphic { transform: scale(.88); transform-origin: top left; }
   .book-modal:has(.project-detail-page) .project-detail-page {
